@@ -18,7 +18,7 @@ In this phase, I configured the virtual network adapter settings inside VirtualB
 ### Network & DNS Realignment
 Before joining the domain, the client machine's network adapter settings were modified to use a static IP (`192.168.10.2`) and pointed to the Domain Controller's IP address (`192.168.10.1`) as its primary DNS server.
 
-![Static IP and DNS Settings](images/staticLientIp.png)
+![Static IP and DNS Settings](images/staticClientIp.png)
 
 ---
 
