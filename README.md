@@ -33,8 +33,8 @@ To mimic a production enterprise infrastructure, I built a logical structure ins
 ### Directory Structure & Hierarchy
 I created an Organizational Unit (OU) structure starting with a top-level `Branches` folder, followed by a regional location (`Houston`), which branches further into targeted sub-OUs for asset and user organization (`Laptop`, `Workstation`, `Users`).
 
-![Creating Houston OU](images/image_pr16SI.png)
-![Completed OU Tree Structure](images/image_FSVhGc.png)
+![Creating Houston OU](images/creatingOU.png)
+![Completed OU Tree Structure](images/3OUinsideHouston.png)
 
 ### Security Groups & User Provisioning
 To manage access control effectively, I deployed three functional departmental Security Groups: `Accounting`, `Helpdesk`, and `ITSupport`. Individual employee accounts, such as `Alice Johnson`, were provisioned and mapped explicitly into their corresponding business groups.
