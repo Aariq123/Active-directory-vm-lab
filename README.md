@@ -1,57 +1,65 @@
-# Active-directory-vm-lab
 
 # Windows Server Active Directory Home Lab
 
 ## 📌 Project Overview
-This project details the step-by-step deployment of an Active Directory (AD) environment built entirely within **Oracle VirtualBox**. Following foundational industry practices, I deployed a Windows Server instance, promoted it to a Domain Controller, established an organizational structure with users and groups, and successfully integrated a Windows client machine into the domain.
+This project details the step-by-step deployment of a hands-on Active Directory (AD) environment built entirely within **Oracle VirtualBox**. Following foundational industry practices, I deployed a Windows Server instance, promoted it to a Domain Controller (`lab.local`), established a department-focused organizational hierarchy with a branch, users and groups, successfully integrated a Windows client workstation into the domain, and implemented delegation controls.
 
 ## 🛠️ Environment & Tools
 * **Hypervisor:** VirtualBox
-* **Domain Controller OS:** Windows Server (Standard / Evaluation)
-* **Client OS:** Windows 10 / 11 Pro
-* **Core Services:** Active Directory Domain Services (AD DS), DNS
+* **Domain Controller OS:** Windows Server 2022 Standard Evaluation
+* **Client OS:** Windows 11 Pro 
+* **Core Services:** Active Directory Domain Services (AD DS), DNS, Group Policy Management
 
 ---
 
-## 🚀 Phase 1: Environment Setup
-In this phase, I configured the virtualized environment and installed the base operating systems.
-* Set up a dedicated virtual network in VirtualBox so the Server and Client could talk to each other safely.
-* Installed the Windows Server operating system.
+## Phase 1: Environment Setup & Network Configuration
+In this phase, I configured the virtual network adapter settings inside VirtualBox to allow internal host communication and set up static routing on the client side so it could locate the Domain Controller.
 
-![VirtualBox Network Configuration](images/YOUR-IMAGE-NAME-HERE.png)
-![Windows Server Base Installation](images/YOUR-IMAGE-NAME-HERE.png)
+### Network & DNS Realignment
+Before joining the domain, the client machine's network adapter settings were modified to use a static IP (`192.168.10.2`) and pointed to the Domain Controller's IP address (`192.168.10.1`) as its primary DNS server.
+
+![Static IP and DNS Settings](images/staticLientIp.png)
 
 ---
 
-## 🌲 Phase 2: Forest Creation & Domain Controller Promotion
-Here, I turned the standalone server into the central brain of the network—the **Domain Controller (DC)**.
-* Installed the Active Directory Domain Services (AD DS) role.
-* Promoted the server, which automatically created a new **Active Directory Forest** (the logical boundary for the network).
-
-![AD DS Role Installation](images/YOUR-IMAGE-NAME-HERE.png)
-![DC Promotion Wizard](images/YOUR-IMAGE-NAME-HERE.png)
+## 🌲 Phase 2: Domain Architecture & Directory Setup
+*(Note: This phase covers the promotion of the server to a Domain Controller and the creation of the `lab.local` forest.)*
 
 ---
 
 ## 👥 Phase 3: Organizational Units (OUs), Groups, and Users
-To keep the company organized, I built a logical structure inside Active Directory Users and Computers (ADUC).
-* **Organizational Units (OUs):** Think of these like folders to organize people and computers based on departments.
-* **Security Groups:** Created three distinct groups to manage permissions efficiently: `Help Desk`, `IT Support`, and `Accounting`.
-* **Users:** Created 3 individual employee user accounts and assigned them to their respective groups.
+To mimic a production enterprise infrastructure, I built a logical structure inside **Active Directory Users and Computers (ADUC)** to manage corporate assets and user lifecycle efficiently.
 
-![OU Tree Structure](images/YOUR-IMAGE-NAME-HERE.png)
-![Created Security Groups](images/YOUR-IMAGE-NAME-HERE.png)
-![New User Account Creation](images/YOUR-IMAGE-NAME-HERE.png)
+### Directory Structure & Hierarchy
+I created an Organizational Unit (OU) structure starting with a top-level `Branches` folder, followed by a regional location (`Houston`), which branches further into targeted sub-OUs for asset and user organization (`Laptop`, `Workstation`, `Users`).
+
+![Creating Houston OU](images/image_pr16SI.png)
+![Completed OU Tree Structure](images/image_FSVhGc.png)
+
+### Security Groups & User Provisioning
+To manage access control effectively, I deployed three functional departmental Security Groups: `Accounting`, `Helpdesk`, and `ITSupport`. Individual employee accounts, such as `Alice Johnson`, were provisioned and mapped explicitly into their corresponding business groups.
+
+![Security Groups Inventory](images/image_AZvEAq.png)
+![Alice Johnson User Profile](images/image_V9gAbh.png)
+![Mapping User to Helpdesk Group](images/image_sL-RCL.png)
 
 ---
 
 ## 🔐 Phase 4: Client Integration, Delegation & Access Control
-The final phase proved that the lab actually works by connecting a separate machine to our new domain.
-* **Domain Join:** Changed the client machine's DNS settings to point to the Server, then joined it to the domain. The machine now safely appears in the DC's `Computers` container.
-* **Authentication Testing:** Verified network access by logging in both as the powerful Domain Administrator and as one of our newly created standard users.
-* **Delegation of Control:** Practiced the security principle of "least privilege" by delegating specific permissions (like resetting passwords) to the Help Desk/IT Support teams without making them full administrators.
+The final phase validates the lab deployment by authenticating network access, applying systems policies, and structuring administrative permissions.
 
-![Client DNS Settings](images/YOUR-IMAGE-NAME-HERE.png)
-![Successful Domain Join](images/YOUR-IMAGE-NAME-HERE.png)
-![User Login Verification](images/YOUR-IMAGE-NAME-HERE.png)
-![Delegation of Control Wizard](images/YOUR-IMAGE-NAME-HERE.png)
+### Domain Join Verification
+After aligning the network settings, the Windows client machine (`aariq`) successfully joined the `lab.local` domain. The machine computer object automatically populated inside the designated directory path on the Domain Controller.
+
+![Welcome to Domain Prompt](images/image_35XkWs.png)
+![Verified Computer Object in Active Directory](images/image_AadJ2x.png)
+
+### Systems Policy Management
+I explored the **Group Policy Management Console (GPMC)** to audit administrative guardrails and default security configurations, reviewing domain-wide password rules such as the Maximum Password Age settings.
+
+![Group Policy Password Age Setting](images/image_nxG8WF.png)
+
+### Administrative Delegation of Control
+To practice the security principle of **least privilege**, I ran the Delegation of Control Wizard. This assigned specific elevated operational tasks (such as resetting user passwords) directly to the `Helpdesk` security group without explicitly adding them to the global Domain Admins group.
+
+![Delegation of Control Wizard Setup](images/image_wMHRaS.png)
