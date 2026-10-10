@@ -39,9 +39,9 @@ I created an Organizational Unit (OU) structure starting with a top-level `Branc
 ### Security Groups & User Provisioning
 To manage access control effectively, I deployed three functional departmental Security Groups: `Accounting`, `Helpdesk`, and `ITSupport`. Individual employee accounts, such as `Alice Johnson`, were provisioned and mapped explicitly into their corresponding business groups.
 
-![Security Groups Inventory](images/image_AZvEAq.png)
-![Alice Johnson User Profile](images/image_V9gAbh.png)
-![Mapping User to Helpdesk Group](images/image_sL-RCL.png)
+![Security Groups Inventory](images/created3Groups)
+![Alice Johnson User Profile](images/addingUsersToGroups.png)
+
 
 ---
 
