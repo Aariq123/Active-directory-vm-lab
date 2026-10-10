@@ -33,7 +33,7 @@ To mimic a production enterprise infrastructure, I built a logical structure ins
 ### Directory Structure & Hierarchy
 I created an Organizational Unit (OU) structure starting with a top-level `Branches` folder, followed by a regional location (`Houston`), which branches further into targeted sub-OUs for asset and user organization (`Laptop`, `Workstation`, `Users`).
 
-![Creating Houston OU](images/creatingOU.png)
+![Creating Houston OU](images/creatingOU(Houston).png)
 ![Completed OU Tree Structure](images/3OUinsideHouston.png)
 
 ### Security Groups & User Provisioning
