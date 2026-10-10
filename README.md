@@ -51,15 +51,15 @@ The final phase validates the lab deployment by authenticating network access, a
 ### Domain Join Verification
 After aligning the network settings, the Windows client machine (`aariq`) successfully joined the `lab.local` domain. The machine computer object automatically populated inside the designated directory path on the Domain Controller.
 
-![Welcome to Domain Prompt](images/image_35XkWs.png)
-![Verified Computer Object in Active Directory](images/image_AadJ2x.png)
+![Welcome to Domain Prompt](images/joiningWithClientVm.png)
+![Verified Computer Object in Active Directory](images/ClientComputer.png)
 
 ### Systems Policy Management
 I explored the **Group Policy Management Console (GPMC)** to audit administrative guardrails and default security configurations, reviewing domain-wide password rules such as the Maximum Password Age settings.
 
-![Group Policy Password Age Setting](images/image_nxG8WF.png)
+![Group Policy Password Age Setting](images/PassPolicy.png)
 
 ### Administrative Delegation of Control
 To practice the security principle of **least privilege**, I ran the Delegation of Control Wizard. This assigned specific elevated operational tasks (such as resetting user passwords) directly to the `Helpdesk` security group without explicitly adding them to the global Domain Admins group.
 
-![Delegation of Control Wizard Setup](images/image_wMHRaS.png)
+![Delegation of Control Wizard Setup](images/delegatingToHelpdesk.png)
